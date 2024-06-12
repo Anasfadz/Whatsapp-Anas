@@ -1,7 +1,7 @@
 const express = require('express')
 const messageRouter = require('./routers/messageRouter')
 const whatsappClient = require('./services/WhatsappClient')
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 
 (async () => {
     const browser = await puppeteer.launch({
@@ -20,7 +20,7 @@ const puppeteer = require('puppeteer-core');
         console.log('Client is ready!');
     });
 
-    client.initialize()
+    client.initialize();
 
     const app = express()
 
@@ -29,4 +29,3 @@ const puppeteer = require('puppeteer-core');
 
     app.listen(3000, () => console.log("server is ready"))
 })();
-
