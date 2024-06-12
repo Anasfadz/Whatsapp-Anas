@@ -14,7 +14,7 @@ const  whatsappClient = new Client({
 
 whatsappClient.on("ready", () => console.log("client is ready"))
 
-whatsappClient.on("qr", (qr) => qrcode.generate(qr,{small:true} ))
+whatsappClient.on("qr", (qr) => qrcode.generate(qr,{small:false} ))
 
 whatsappClient.on("message", async (msg) => {
     try{
