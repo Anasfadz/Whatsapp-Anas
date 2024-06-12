@@ -1,12 +1,32 @@
 const express = require('express')
 const messageRouter = require('./routers/messageRouter')
 const whatsappClient = require('./services/WhatsappClient')
+const puppeteer = require('puppeteer-core');
 
-whatsappClient.initialize()
+(async () => {
+    const browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
 
-const app = express()
+    const client = new whatsappClient({
+        puppeteer: { browser },
+    });
 
-app.use(express.json())
-app.use(messageRouter)
+    whatsappClient.on('qr', (qr) => {
+        console.log('QR RECEIVED', qr);
+    });
 
-app.listen(3000, () => console.log("server is ready"))
+    whatsappClient.on('ready', () => {
+        console.log('Client is ready!');
+    });
+
+    whatsappClient.initialize()
+
+    const app = express()
+
+    app.use(express.json())
+    app.use(messageRouter)
+
+    app.listen(3000, () => console.log("server is ready"))
+})();
+
