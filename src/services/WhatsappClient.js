@@ -1,38 +1,31 @@
-const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
-const puppeteer = require('puppeteer');
+const { Client, LocalAuth} = require('whatsapp-web.js')
+const qrcode = require('qrcode-terminal')
 
-const initWhatsAppClient = async () => {
-    const browser = await puppeteer.launch({
+const  whatsappClient = new Client({
+    authStrategy: new LocalAuth(),
+    puppeteer: {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    },
+    webVersionCache: {
+        type: 'remote',
+        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html`
+    }
+})
 
-    const whatsappClient = new Client({
-        authStrategy: new LocalAuth(),
-        puppeteer: { browser },
-        webVersionCache: {
-            type: 'remote',
-            remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+whatsappClient.on("ready", () => console.log("client is ready"))
+
+whatsappClient.on("qr", (qr) => qrcode.generate(qr,{small:true} ))
+
+whatsappClient.on("message", async (msg) => {
+    try{
+        if(msg.from != "status@broadcast") {
+            const contact = await msg.getContact()
+            console.log(contact, msg.body)
         }
-    });
+    }
+    catch(error) {
+        console.log(error)
+    }
+})
 
-    whatsappClient.on("ready", () => console.log("client is ready"));
-
-    whatsappClient.on("qr", (qr) => qrcode.generate(qr, { small: true }));
-
-    whatsappClient.on("message", async (msg) => {
-        try {
-            if (msg.from !== "status@broadcast") {
-                const contact = await msg.getContact();
-                console.log(contact, msg.body);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    });
-
-    await whatsappClient.initialize();
-    return whatsappClient;
-};
-
-module.exports = initWhatsAppClient;
+module.exports = whatsappClient
