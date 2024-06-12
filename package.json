@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "s": "node src/index.js"
+    "s": "node src/index.js",
+    "b": "npm install express whatsapp-web.js qrcode-terminal puppeteer"
   },
   "author": "",
   "license": "ISC",
