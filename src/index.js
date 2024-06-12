@@ -12,15 +12,15 @@ const puppeteer = require('puppeteer-core');
         puppeteer: { browser },
     });
 
-    whatsappClient.on('qr', (qr) => {
+    client.on('qr', (qr) => {
         console.log('QR RECEIVED', qr);
     });
 
-    whatsappClient.on('ready', () => {
+    client.on('ready', () => {
         console.log('Client is ready!');
     });
 
-    whatsappClient.initialize()
+    client.initialize()
 
     const app = express()
 
