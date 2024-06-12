@@ -1,12 +1,20 @@
-const express = require('express')
-const messageRouter = require('./routers/messageRouter')
-const whatsappClient = require('./services/WhatsappClient')
+const express = require('express');
+const messageRouter = require('./routers/messageRouter');
+const initWhatsAppClient = require('./services/WhatsappClient');
 
-whatsappClient.initialize()
+const app = express();
+app.use(express.json());
+app.use(messageRouter);
 
-const app = express()
+const startServer = async () => {
+    try {
+        const whatsappClient = await initWhatsAppClient();
+        console.log("WhatsApp client initialized");
+    } catch (error) {
+        console.error("Error initializing WhatsApp client:", error);
+    }
 
-app.use(express.json())
-app.use(messageRouter)
+    app.listen(3000, () => console.log("Server is ready"));
+};
 
-app.listen(3000, () => console.log("server is ready"))
+startServer();
