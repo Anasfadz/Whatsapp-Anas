@@ -7,10 +7,6 @@ const  whatsappClient = new Client({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', ],
     },
-    webVersionCache: {
-        type: 'remote',
-        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`
-    }
 })
 
 whatsappClient.on("ready", () => console.log("client is ready"))
