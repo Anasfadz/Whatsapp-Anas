@@ -7,6 +7,7 @@ const  whatsappClient = new Client({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', ],
     },
+    dataPath: 'session-wa'
 })
 
 whatsappClient.on("ready", () => console.log("client is ready"))
