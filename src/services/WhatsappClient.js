@@ -7,10 +7,10 @@ const  whatsappClient = new Client({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox',],
     },
-    webVersionCache: {
-        type: 'remote',
-        remotePath: `https://raw.githubusercontent.com/guigo613/alternative-wa-version/main/html/2.2412.54v2.html`
-    }
+    // webVersionCache: {
+    //     type: 'remote',
+    //     remotePath: `https://raw.githubusercontent.com/guigo613/alternative-wa-version/main/html/2.2412.54v2.html`
+    // }
     // webVersion: "2.2412.54v2"
 })
 
