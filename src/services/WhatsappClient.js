@@ -9,9 +9,8 @@ const  whatsappClient = new Client({
     },
     webVersionCache: {
         type: 'remote',
-        remotePath: `https://raw.githubusercontent.com/guigo613/alternative-wa-version/main/html/2.2412.54v2.html`
+        remotePath: `https://raw.githubusercontent.com/guigo613/alternative-wa-version/main/html/2.2411.2.html`
     },
-    webVersion: "2.2412.54v2"
 })
 
 whatsappClient.on("ready", () => console.log("client is ready"))
