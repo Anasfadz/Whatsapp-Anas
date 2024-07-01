@@ -4,6 +4,7 @@ const qrcode = require('qrcode-terminal')
 const  whatsappClient = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
+        headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', ],
     },
     webVersionCache: {
