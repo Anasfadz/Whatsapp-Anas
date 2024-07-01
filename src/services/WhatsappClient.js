@@ -2,14 +2,12 @@ const { Client, LocalAuth} = require('whatsapp-web.js')
 const qrcode = require('qrcode-terminal')
 
 const  whatsappClient = new Client({
-    authStrategy: new LocalAuth(),
+    authStrategy: new LocalAuth({
+        dataPath: 'sessions-ws'
+    }),
     puppeteer: {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox',],
-    },
-    webVersionCache: {
-        type: 'remote',
-        remotePath: `https://raw.githubusercontent.com/guigo613/alternative-wa-version/main/html/2.2411.2.html`
     },
 })
 
